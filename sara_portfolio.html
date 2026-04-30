@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sara Yasser Nour — Data Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --bg2: #0f1629;
+    --bg3: #141d35;
+    --accent: #00e5c4;
+    --accent2: #7b6cff;
+    --accent3: #ff6b6b;
+    --text: #e8eaf2;
+    --muted: #7a8299;
+    --border: rgba(255,255,255,0.07);
+    --card: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.07);
+    --glow: 0 0 40px rgba(0,229,196,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(0,229,196,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -100px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(123,108,255,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { max-width: 800px; animation: fadeUp 0.9s ease both; }
+  .hero-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(0,229,196,0.3);
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -2px;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s;
+    cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #050a18;
+  }
+  .btn-primary:hover { background: #00c4a8; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,229,196,0.25); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { background: var(--card-hover); border-color: rgba(255,255,255,0.15); }
+
+  .hero-stats {
+    margin-top: 5rem;
+    display: flex; gap: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    color: #fff;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---- SECTIONS ---- */
+  section { padding: 7rem 4rem; }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-tag::before {
+    content: '//';
+    opacity: 0.5;
+  }
+  h2.section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -1px;
+    color: #fff;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ---- EXPERIENCE ---- */
+  #experience { background: var(--bg2); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+  .tl-item {
+    padding-left: 2.5rem;
+    margin-bottom: 3.5rem;
+    position: relative;
+    animation: fadeUp 0.6s ease both;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -5px; top: 6px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(0,229,196,0.4);
+  }
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+  }
+  .tl-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.3rem;
+  }
+  .tl-org {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .tl-bullets { list-style: none; }
+  .tl-bullets li {
+    font-size: 0.92rem;
+    color: #b0b8cc;
+    padding: 0.3rem 0;
+    display: flex; gap: 0.6rem;
+  }
+  .tl-bullets li::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ---- PROJECTS ---- */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .project-card:hover { background: var(--card-hover); border-color: rgba(255,255,255,0.12); transform: translateY(-4px); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(0,229,196,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+  .project-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.6rem;
+  }
+  .project-desc {
+    font-size: 0.88rem;
+    color: #8a93a8;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+  .project-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.05);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .tag.accent { background: rgba(0,229,196,0.1); color: var(--accent); border-color: rgba(0,229,196,0.2); }
+
+  /* ---- GSOC BADGE ---- */
+  .gsoc-banner {
+    background: linear-gradient(135deg, rgba(66,133,244,0.12), rgba(234,67,53,0.08), rgba(52,168,83,0.1), rgba(251,188,5,0.08));
+    border: 1px solid rgba(66,133,244,0.25);
+    border-radius: 20px;
+    padding: 2.5rem 3rem;
+    display: flex; align-items: center; gap: 2.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .gsoc-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='20' cy='20' r='1' fill='rgba(255,255,255,0.03)'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .gsoc-logo {
+    font-size: 3.5rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 20px rgba(66,133,244,0.3));
+  }
+  .gsoc-info {}
+  .gsoc-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .gsoc-subtitle {
+    font-size: 0.92rem;
+    color: #8a93a8;
+    margin-bottom: 1rem;
+  }
+  .gsoc-badges { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .gsoc-badge {
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+  }
+  .badge-google { background: rgba(66,133,244,0.15); color: #6ba3f5; border: 1px solid rgba(66,133,244,0.25); }
+  .badge-gsoc { background: rgba(234,67,53,0.12); color: #f47067; border: 1px solid rgba(234,67,53,0.2); }
+  .badge-contrib { background: rgba(52,168,83,0.12); color: #5ecc8a; border: 1px solid rgba(52,168,83,0.2); }
+
+  /* ---- SKILLS ---- */
+  #skills { background: var(--bg2); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+  }
+  .skill-group-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .skill-group-title span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-pill {
+    font-size: 0.83rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.05);
+    color: #c4cad9;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .skill-pill:hover { background: rgba(0,229,196,0.1); color: var(--accent); border-color: rgba(0,229,196,0.25); }
+
+  /* ---- EDUCATION ---- */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: border-color 0.3s;
+  }
+  .edu-card:hover { border-color: rgba(0,229,196,0.2); }
+  .edu-degree {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 0.4rem;
+  }
+  .edu-uni { font-size: 0.9rem; color: var(--accent); margin-bottom: 0.3rem; }
+  .edu-date { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; }
+  .edu-detail { font-size: 0.88rem; color: #8a93a8; line-height: 1.6; }
+  .grade-badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.25rem 0.8rem;
+    border-radius: 100px;
+    background: rgba(0,229,196,0.12);
+    color: var(--accent);
+    border: 1px solid rgba(0,229,196,0.2);
+    margin-top: 0.8rem;
+  }
+
+  /* ---- AWARDS ---- */
+  #awards { background: var(--bg2); }
+  .awards-list { display: flex; flex-direction: column; gap: 1rem; }
+  .award-item {
+    display: flex; align-items: center; gap: 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.8rem;
+    transition: all 0.2s;
+  }
+  .award-item:hover { background: var(--card-hover); border-color: rgba(255,188,5,0.2); }
+  .award-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .award-text { font-size: 0.92rem; color: #b0b8cc; }
+  .award-text strong { color: #fff; font-weight: 600; }
+
+  /* ---- CONTACT ---- */
+  #contact {
+    text-align: center;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  #contact::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,229,196,0.06), transparent);
+    pointer-events: none;
+  }
+  .contact-links {
+    display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+    margin-top: 2.5rem;
+  }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.92rem;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+  .contact-link:hover { color: var(--accent); border-color: rgba(0,229,196,0.3); background: rgba(0,229,196,0.05); }
+
+  /* ---- FOOTER ---- */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.45s; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero, section { padding: 5rem 1.5rem 3rem; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+    .gsoc-banner { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SYN.</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Open to opportunities · Mansoura, Egypt</div>
+    <h1>Sara Yasser<br><em>Nour</em></h1>
+    <p class="hero-sub">Junior Data Engineer building production-grade ETL/ELT pipelines, real-time Kafka streams, and dbt data models — turning raw data into analytics-ready gold.</p>
+    <div class="hero-cta">
+      <a href="mailto:sara.nour813@gmail.com" class="btn btn-primary">Get in touch →</a>
+      <a href="https://github.com/saranour700" target="_blank" class="btn btn-outline">GitHub ↗</a>
+      <a href="https://linkedin.com/in/sara-yasser-nour" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">100k+</span>
+        <span class="stat-label">Records Processed</span>
+      </div>
+      <div>
+        <span class="stat-num">~70%</span>
+        <span class="stat-label">Manual Effort Cut</span>
+      </div>
+      <div>
+        <span class="stat-num">5+</span>
+        <span class="stat-label">Airflow DAGs Built</span>
+      </div>
+      <div>
+        <span class="stat-num">A+</span>
+        <span class="stat-label">Graduation Project</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-tag">Career</div>
+  <h2 class="section-title">Experience</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">Jan 2026 – Apr 2026</div>
+      <div class="tl-title">Data Engineering & Analytics Trainee</div>
+      <div class="tl-org">NTI · Mansoura, Egypt</div>
+      <ul class="tl-bullets">
+        <li>Built ETL/ELT pipelines (Python, SQL, dbt) processing 100,000+ records into analytics-ready models; orchestrated 5+ Airflow DAGs cutting manual effort by ~70%.</li>
+        <li>Implemented Medallion Architecture (Bronze → Silver → Gold) with star schema in PostgreSQL and DuckDB; developed real-time Kafka ingestion with sub-10-minute data latency.</li>
+        <li>Enforced data quality via dbt tests and SQL assertions; optimised pandas transformations improving throughput by ~30%.</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Nov 2022 – Mar 2023</div>
+      <div class="tl-title">Data Analysis Intern</div>
+      <div class="tl-org">ITI · Mansoura, Egypt</div>
+      <ul class="tl-bullets">
+        <li>Analysed 50,000+ records from multi-source datasets using pandas, Matplotlib, and Seaborn; delivered insights across 4 monthly reports to 3+ stakeholders.</li>
+        <li>Cleaned and validated 10+ tables in SQL and Python; built KPI dashboards supporting data-driven decisions.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-tag">Work</div>
+  <h2 class="section-title">Projects</h2>
+
+  <!-- GSoC Banner -->
+  <div class="gsoc-banner fade-up">
+    <div class="gsoc-logo">☀️</div>
+    <div class="gsoc-info">
+      <div class="gsoc-title">Google Summer of Code — Contributor</div>
+      <div class="gsoc-subtitle">Open-source contribution recognised by Google's flagship developer program.</div>
+      <div class="gsoc-badges">
+        <span class="gsoc-badge badge-google">Google</span>
+        <span class="gsoc-badge badge-gsoc">GSoC 2025</span>
+        <span class="gsoc-badge badge-contrib">Open Source Contributor</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-icon">⚡</div>
+      <div class="project-title">Solar Energy Monitoring Platform</div>
+      <div class="project-desc">Streamed 34,000+ real-time MQTT events from a simulated solar fleet via Apache Kafka and Docker Compose. Automated incremental dbt runs every 10 min via Airflow; Streamlit dashboard with AC power, inverter ratio, and availability KPIs.</div>
+      <div class="project-tags">
+        <span class="tag accent">Kafka</span>
+        <span class="tag">Airflow</span>
+        <span class="tag">dbt</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">Docker</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">🍎</div>
+      <div class="project-title">OpenFoodFacts ELT Pipeline</div>
+      <div class="project-desc">Extracted 465+ Canadian food records from 2 APIs into DuckDB Bronze layer; Silver (15+ normalised fields) and Gold (star schema) with dbt, reducing query complexity by ~50%. ChromaDB for sub-second semantic similarity search.</div>
+      <div class="project-tags">
+        <span class="tag accent">DuckDB</span>
+        <span class="tag">dbt</span>
+        <span class="tag">ChromaDB</span>
+        <span class="tag">Python</span>
+        <span class="tag">ELT</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">🧠</div>
+      <div class="project-title">ASD Classification via CNN</div>
+      <div class="project-desc">Preprocessed 1,000+ eye-tracking image samples with augmentation and class balancing. Tuned 3+ CNN architectures with dropout and early stopping; evaluated via confusion matrices and ROC curves. Graduation project — Grade A+.</div>
+      <div class="project-tags">
+        <span class="tag accent">CNN</span>
+        <span class="tag">Python</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Deep Learning</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag">Toolkit</div>
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title"><span></span>Languages & Data</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">SQL</span>
+        <span class="skill-pill">pandas</span>
+        <span class="skill-pill">NumPy</span>
+        <span class="skill-pill">Scikit-learn</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span></span>Pipelines & Streaming</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Apache Kafka</span>
+        <span class="skill-pill">Apache Airflow</span>
+        <span class="skill-pill">dbt</span>
+        <span class="skill-pill">ETL / ELT</span>
+        <span class="skill-pill">Apache Spark</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span></span>Databases & Storage</div>
+      <div class="skill-pills">
+        <span class="skill-pill">PostgreSQL</span>
+        <span class="skill-pill">DuckDB</span>
+        <span class="skill-pill">MySQL</span>
+        <span class="skill-pill">ChromaDB</span>
+        <span class="skill-pill">Medallion Architecture</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span></span>Visualisation & Infra</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Streamlit</span>
+        <span class="skill-pill">Power BI</span>
+        <span class="skill-pill">Tableau</span>
+        <span class="skill-pill">Docker</span>
+        <span class="skill-pill">Git</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-tag">Background</div>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">M.Sc. — AI & Machine Learning</div>
+      <div class="edu-uni">Mansoura University</div>
+      <div class="edu-date">Jan 2025 – Dec 2026 (Expected)</div>
+      <div class="edu-detail">Research: Applying CNNs/RNNs to healthcare datasets for disease detection; targeting 2026 publication.</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">B.Sc. — Computer & Communication Engineering</div>
+      <div class="edu-uni">Mansoura University</div>
+      <div class="edu-date">Graduated June 2024</div>
+      <div class="edu-detail">Graduation Project: ASD Classification using CNNs on Eye-Tracking Data.</div>
+      <div class="grade-badge">Grade: A+</div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-tag">Recognition</div>
+  <h2 class="section-title">Awards & Involvement</h2>
+  <div class="awards-list">
+    <div class="award-item">
+      <div class="award-icon">🥇</div>
+      <div class="award-text"><strong>1st Place</strong> — 14th UGRF Special Edition: 3rd Egyptian Junior Researcher Competition, Nile University (Engineering & Applied Science)</div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon">🥈</div>
+      <div class="award-text"><strong>2nd Place</strong> — RC ROVER Competition, 38th Radio Science Conference; contributed to system integration and autonomous rover control</div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon">📢</div>
+      <div class="award-text"><strong>Head of PR & Business Development</strong> — Momentum Team · Secured 3+ partnerships and managed a 1,000+ attendee event</div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon">🚗</div>
+      <div class="award-text"><strong>Fundraiser & Donor Relations</strong> — Mansoura Motorsport · Secured full funding via 10+ sponsors</div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon">🔵</div>
+      <div class="award-text"><strong>Core Team Member</strong> — GDSC Mansoura University · Delivered workshops to 100+ attendees/session; drove 30%+ community growth</div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon">❤️</div>
+      <div class="award-text"><strong>Volunteer Teacher</strong> — Resala Charity · STEM education for 15+ underserved students (ages 10–12)</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">Say hello</div>
+  <h2 class="section-title">Get in Touch</h2>
+  <p style="color: var(--muted); max-width: 480px; margin: 0 auto; font-size: 1rem;">Whether it's a data engineering role, open-source project, or research collaboration — I'd love to hear from you.</p>
+  <div class="contact-links">
+    <a href="mailto:sara.nour813@gmail.com" class="contact-link">✉️ sara.nour813@gmail.com</a>
+    <a href="https://linkedin.com/in/sara-yasser-nour" target="_blank" class="contact-link">💼 LinkedIn</a>
+    <a href="https://github.com/saranour700" target="_blank" class="contact-link">🐙 GitHub</a>
+    <a href="tel:+201069846319" class="contact-link">📱 +20 106 984 6319</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>Sara Yasser Nour · Data Engineer</span>
+  <span>Mansoura, Egypt · 2025</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.tl-item, .project-card, .skill-group, .edu-card, .award-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
